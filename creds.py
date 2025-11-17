@@ -46,6 +46,7 @@ def main(masterlist_path, output_path):
     unmatched_creds = 0
     unmatched_creds_list = set()
     matched_fos = 0
+    matched_fos_list = Counter()
     unmatched_fos = 0
     unmatched_fos_list = Counter()
 
@@ -108,6 +109,7 @@ def main(masterlist_path, output_path):
                     unmatched_fos_list[course_field] += 1
                 else:
                     matched_fos += 1
+                    matched_fos_list[course_field] += 1
 
 
                 # Assign the degree (cred (bachelor, masters) + field of study (compsci, history)) to a variable
@@ -120,10 +122,16 @@ def main(masterlist_path, output_path):
                 if (processed % 100 == 0):
                     print(f"Processed credentials: {processed}")
 
-    print(f"List of unmatched Fields of study: \n")
+
+    print(f"List of matched fields of study: \n")
+    for fos, count in matched_fos_list.most_common():
+        print(f"{fos}: {count}")
+
+
+    print(f"List of unmatched fields of study: \n")
     for fos, count in unmatched_fos_list.most_common():
         print(f"{fos}: {count}")
-    print(f"Credentials not in WHED List: {unmatched_creds}\nList: {unmatched_creds_list}\n-----------------------------------------------------------\n")
+    print(f"\nCredentials not in WHED List: {unmatched_creds}\nList: {unmatched_creds_list}\n-----------------------------------------------------------\n")
     print(f"\n\nTotal Records Processed: {processed}\n-----------------------------------------------------------\n\nMatched Credentials: {matched_creds}\nUnmatched Credentials: {unmatched_creds}")
     print(f"\n-----------------------------------------------------------\n\nMatched FOS: {matched_fos}\nUnmatched FOS: {unmatched_fos}\n\n-----------------------------------------------------------\n")
     print(f"There were {dual_qual_count} valid dual qualifications processed")
@@ -185,7 +193,7 @@ def get_fos_code(whed_fos, ext_degree):
     elif " in " in course_name:
         strings = course_name.split(" in ")
     else:
-        strings = ["Test", "Unknown"]
+        strings = ["Placeholder", course_name]
     course_field = strings[1]
 
     match = any(
