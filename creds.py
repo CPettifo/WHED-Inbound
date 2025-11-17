@@ -123,12 +123,12 @@ def main(masterlist_path, output_path):
                     print(f"Processed credentials: {processed}")
 
 
-    print(f"List of matched fields of study: \n")
+    print(f"List of matched fields of study ({matched_fos}/{processed}): \n")
     for fos, count in matched_fos_list.most_common():
         print(f"{fos}: {count}")
 
 
-    print(f"List of unmatched fields of study: \n")
+    print(f"\nList of unmatched fields of study ({unmatched_fos}/{processed}): \n")
     for fos, count in unmatched_fos_list.most_common():
         print(f"{fos}: {count}")
     print(f"\nCredentials not in WHED List: {unmatched_creds}\nList: {unmatched_creds_list}\n-----------------------------------------------------------\n")
