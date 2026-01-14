@@ -1,8 +1,13 @@
 .env
 
 masterlist.xlsx
+~$masterlist.xlsx
 glossary.xlsx
+~$glossary.xlsx
 output.xlsx
+~$output.xlsx
 
 __pycache__/
 *.py[cod]
+
+venv/
