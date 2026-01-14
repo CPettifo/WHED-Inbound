@@ -54,17 +54,6 @@ def main(masterlist_path, output_path):
                 }
                 # #TODO implement levels Match credentials to the appropriate WHED CredCode (e.g. Australian Bachelor has CredCode of ####)
 
-                # Match Field to appropriate whed FOS using the following hierarchy
-                    # If any of the FOS fields match, use that
-                        # Get WHED FOS Code and add it to a dict
-                    # If a shaved version of the credential name matches a WHED FOS field
-                        # Get WHED FOS Code and add it to a dict
-                    # If there is a fuzzy match
-                        # Add the cred to the "to be sorted" category, and add to a bucket
-                        # By bucket I mean basically to have all unsorted categories matched together, so there could potentially be 100 instances of a
-                        # non-matched field (e.g. Mobile Programming) that could then be categorised by a Data Officer at the end of the program
-    
-    # Delete system 32 (kidding)
     exit
 
 # will return the conn for the database connection
@@ -73,7 +62,7 @@ def whed_connect():
     if not certificate:
         raise ValueError("No DB_CERT value found")
     
-    # create the ssl file from the ssl contents stored in env variabls
+    # create the ssl file at runtime from the ssl contents stored in env variabls
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pem") as ssl_file:
         ssl_file.write(certificate.encode("utf-8"))
         ssl_file_path = ssl_file.name
@@ -88,12 +77,21 @@ def whed_connect():
     )
     return conn
 
-# takes the current row of the credentials table and the whed_levels sheet to try to return the credential code
+#TODO takes the current row of the credentials table and the whed_levels sheet to try to return the credential code
 def get_cred_code(row, whed_levels):
     return "1A"
 
-def get_fos_code(row):
-    return "1111"
+def get_fos_code(row, ext_cred):
+    # Match Field to appropriate whed FOS using the following hierarchy
+                    # If any of the FOS fields match, use that
+                        # Get WHED FOS Code and add it to a dict
+                    # If a shaved version of the credential name matches a WHED FOS field
+                        # Get WHED FOS Code and add it to a dict
+                    # If there is a partial match
+                        # Add the cred to the "to be sorted" category, and add to a bucket
+                        # By bucket I mean basically to have all unsorted categories matched together, so there could potentially be 100 instances of a
+                        # non-matched field (e.g. Mobile Programming) that could then be categorised by a Data Officer at the end of the program
+    return "404"
 
 def get_insts(output_path):
     insts = 0
