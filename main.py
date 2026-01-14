@@ -26,8 +26,9 @@ query = "SELECT OrgID AS 'Connection Test' FROM whed_org WHERE OrgID < 25 LIMIT 
 try:
     creds.whed_test_connect(query)
     print("WHED Connection Successful")
-except:
-    print("Could not connect to MySQL database")
+except Exception as e:
+    print("Could not connect to MySQL database", e)
+    exit(1)
 
 
 # Ask for user input if categorisation is required
