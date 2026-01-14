@@ -70,15 +70,3 @@ This will display summaries to users, Data Officers will see summaries (institut
 
 #### Mockups of Improved WHED UI (not priority for scope of internship)
 Creation of new displays of credential and institution pages
-
-
-### Breakdown of tasks
-January 12 - Feb 12
-First fortnight: learning of WHED back-office, meeting other staff, project overview and initial meetings, collaboration, small development tasks, review of current codebase with complete freedom to try to import standardised excel sheets
-Second fortnight: Develop project requirements together, testing plan, etc.
-February:
-March: 
-April: 
-May: 
-June: 
-July: 
