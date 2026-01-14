@@ -1,8 +1,7 @@
 # This file will process the standardised credential data and convert it into the appropriate WHED Codes
 
-import pymysql, cryptography
+import pymysql, cryptography, os, tempfile
 from dotenv import load_dotenv
-import os, tempfile
 from openpyxl import load_workbook, Workbook
 from collections import Counter
 
