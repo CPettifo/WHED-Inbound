@@ -137,6 +137,7 @@ def main(masterlist_path, output_path):
     print(f"There were {dual_qual_count} valid dual qualifications processed")
     exit
 
+# Will test the connection to the db
 def whed_test_connect(query):
     load_dotenv()
     timeout = 10
@@ -177,8 +178,9 @@ def whed_connect():
     )
     return connection
 
-# takes the current row of the credentials table and the whed_levels sheet to try match and return the credential code
+# takes the current row of the credentials object and the whed_levels sheet to try match and return the credential code
 def get_cred_code(whed_creds, ext_degree):
+    
    
 
 
@@ -202,11 +204,12 @@ def get_fos_code(whed_fos, ext_degree):
     )
 
     if match:
-        # get fos code, for now return 1111
+        # get matching fos code, for now return 1111
         return 1111, course_field
 
 
     if not match:
+        # Debug print
         print(f"--------------------------\nNot a match\nExternal Degree: {course_name}\nField Name: {course_field}\n--------------------------")
         return "????", course_field
     
@@ -224,6 +227,7 @@ def get_fos_code(whed_fos, ext_degree):
     #print("FOS Code Row: ", row)
     return "1111"
 
+# Will return a dict of all institutions in the source list
 def get_insts(output_path):
     # initialise insts list
     insts = []
@@ -256,7 +260,7 @@ def get_insts(output_path):
 
     return insts
 
-# Returns a list of credentials in the WHED.
+# Returns a list of credentials in the WHED for country specified in source file.
 def get_whed_creds(whed_levels, cursor):
     whed_creds = []
     for row in whed_levels.iter_rows(min_row=2, values_only = True):
@@ -285,7 +289,8 @@ def get_whed_creds(whed_levels, cursor):
         whed_creds.append(whed_cred)
 
     return whed_creds
-    
+
+# Get a list of all fields of study in the WHED
 def get_whed_fos(cursor):
     cursor.execute(f"SELECT FOSCode, FOSLevel1, FOSLevel2, FOSLevel3, FOSDisplay FROM whed_lex_fos ORDER BY FOSLevel1, FOSLevel2, FOSLevel3")
     results = cursor.fetchall()
