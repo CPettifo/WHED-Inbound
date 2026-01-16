@@ -33,9 +33,11 @@ Basically a copy of the full extractions we send to the UN
 Heavily rate-limited with limited access
 
 #### Degree Matching
-Will return **Full Match**, **Level Match**, **Field Match**, **Partial Field Match**, **Institution Not Found**, **Credential Not Found**, **No Match At Inst** if there is a matching degree found at the specified institutions
+Will return **Full Match**, **Level Match**, **Field Match**, **Partial Field Match**, **Institution Not Found**, **Credential Not Found**, **No Match At Inst** if there is a matching degree found at the specified institutions (either institution name or WHEDID)
 Input would be e.g. United States, Harvard University, Bachelor, Computer Science
-- Search through institutions 
+- Search through institutions by country
+- Match institution based on name or id
+- Match credential based on credential 
 
 
 ### Administration
