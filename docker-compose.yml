@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: mariadb-whed
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./whed_test.sql:/docker-entrypoint-initdb.d/whed_test.sql
+
+volumes:
+  mariadb_data:

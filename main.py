@@ -5,15 +5,6 @@ import categorise, creds
 # any structured data as input
 #TODO move this into a README
 
-# there should be three spreadsheets in your workbook, in the repository is a template with example source information
-# ext_inst is a list of the institutions from the recognised government or credential recognition body
-# It should have the following columns in this order: row index, institution ID, institution name, institution alternative name, institution homepage,
-# a concatenation of the institutional address
-# 
-# ext_cred is a list of the credentials offered 
-# It should have the following columns in this order: institution ID, institution name, whether credential is not expired (manually set this to "No" if it is not present in extraction)
-# Credential level (i.e. Bachelors, Masters, or NQF level), Course Name, Course Code, FOS Levels if available and in descending order of hierarchy
-
 # I'm not planning for this to be particularly well optimised, as it is a script that will only be run periodically, and likely on local systems in the background.
 
 masterlist_path = "masterlist.xlsx"
@@ -32,8 +23,7 @@ except Exception as e:
 
 
 # Ask for user input if categorisation is required
-user_input = input("categorise institutions? [Y/ N]: ")
-
+user_input = input("categorise institutions? [Y/ N]: ").strip().upper()
 
 if user_input == "Y":
     
@@ -43,7 +33,7 @@ if user_input == "Y":
     # Categorise institutions (WHED-Recognised, WHED-Candidate, etc.) and export to an excel spreadsheet
     categorise.main(masterlist_path, postgrad_codes)
 
-user_input = input("do you want to attempt to insert into the whed using masterlist credentials? [Y/ N]: ")
+user_input = input("do you want to attempt to insert into the whed using masterlist credentials? [Y/ N]: ").strip().upper()
 if user_input == "Y":
     creds.main(masterlist_path, output_path)    
     exit(0)
