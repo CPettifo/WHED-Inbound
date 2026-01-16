@@ -126,6 +126,15 @@ def main(masterlist_path, output_path):
     for fos, count in matched_fos_list.most_common():
         print(f"{fos}: {count}")
 
+    # Columns to include in full output
+    # Ext. Inst ID
+    # WHED Inst ID (For now it is ok if this is empty)
+    # CourseLevel
+    # Ext. CredID
+    # WHED FOSCode (if match for now ignore this)
+    # Ext. FOS Levels
+    # Full Course Name (degree["course_name")
+
 
     print(f"\nList of unmatched fields of study ({unmatched_fos}/{processed}): \n")
     for fos, count in unmatched_fos_list.most_common():
