@@ -1,10 +1,11 @@
+import categorise, creds
+
 # The goal of this script is to allow for the analysis of structured HEI data to allow for insertion into the 
 # World Higher Education Database, the first iteration uses CRICOS but given time I plan to modify this to take
 # any structured data as input
-#TODO put this into the README too (or instead of)
-# The structured data is outlined in the README but I've put it here for myself also
+#TODO move this into a README
 
-# there should be three spreadsheets in your workbook
+# there should be three spreadsheets in your workbook, in the repository is a template with example source information
 # ext_inst is a list of the institutions from the recognised government or credential recognition body
 # It should have the following columns in this order: row index, institution ID, institution name, institution alternative name, institution homepage,
 # a concatenation of the institutional address
@@ -15,9 +16,6 @@
 
 # I'm not planning for this to be particularly well optimised, as it is a script that will only be run periodically, and likely on local systems in the background.
 
-import categorise, creds
-
-
 masterlist_path = "masterlist.xlsx"
 output_path = "output.xlsx"
 
@@ -25,8 +23,13 @@ output_path = "output.xlsx"
 print("Testing Connection to WHED")
 # create test query
 query = "SELECT OrgID AS 'Connection Test' FROM whed_org WHERE OrgID < 25 LIMIT 5"
-creds.whed_test_connect(query)
-print("WHED Connection Successful")
+try:
+    creds.whed_test_connect(query)
+    print("WHED Connection Successful")
+except Exception as e:
+    print("Could not connect to MySQL database", e)
+    exit(1)
+
 
 # Ask for user input if categorisation is required
 user_input = input("categorise institutions? [Y/ N]: ")
